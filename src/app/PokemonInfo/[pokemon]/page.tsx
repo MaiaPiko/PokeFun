@@ -42,7 +42,7 @@ export default async function PokeDetails({ params: { pokemon } }: Params) {
 
 	return (
 		<>
-    	<div className="flex justify-center mt-20  ">
+    	<div className="flex justify-center my-20  ">
 
 			<div className="mt-1 items-center bg-pokeRed rounded-xl shadow-xl	">
 				{pokeData ? (

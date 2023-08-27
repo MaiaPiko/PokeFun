@@ -139,6 +139,11 @@ interface Color{
 
   }
 
+
+  interface QuizData{
+    answers: string[]; correctAnswer: string; randomPicture: string; 
+  }
+
   interface OfficialArt {
     front_default: string;
     front_shiny: string;
@@ -158,3 +163,16 @@ interface Color{
     sprites: PokemonSprite;
 
   }
+
+
+  interface PokemonQuizData {
+    answers: string[];
+    correctAnswer: string;
+    randomPicture: string;
+    shinyPicture: string;
+}
+
+interface PokemonArtworkQuiz {
+  officialDefault: string;
+  officialShiny: string;
+}
