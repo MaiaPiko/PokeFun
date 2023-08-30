@@ -20,7 +20,7 @@ export default function PokeWhich() {
 		answers: [],
 		correctAnswer: "",
 		randomPicture: "",
-		shinyPicture: "",
+		// shinyPicture: "",
 	});
 	const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
@@ -47,7 +47,6 @@ export default function PokeWhich() {
 			answers,
 			correctAnswer,
 			randomPicture,
-			shinyPicture,
 		});
 		setDataFetched(true);
 		console.log(correctAnswer);

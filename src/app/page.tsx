@@ -32,51 +32,41 @@ export default function Home() {
 	return (
 		<>
 			<main>
-				<div className={`flex justify-center h-2/3 mt-20 `}>
+				<div className={`flex justify-center  
+				`}>
 					<div
-						className={`flex content-center ${
-							hoverId == "0" || hoverId == "2" ? "gap-44" : "gap-0"
-						}`}
+						className={`flex  items-center sm:flex-col md:flex-row 
+						
+						`}
 					>
 						<div
-							className="text-center"
+							className=" my-14"
 							id="1"
 							onMouseEnter={() => handleMouseEnter("1")}
 							onMouseLeave={() => handleMouseLeave("1")}
 						>
 							<PokeBall
-								link={"PokeData/1"}
-								color={pokeBlue}
+								link={"/QuizOptions"}
+								color={"pokeBlue"}
 								isHover={hoverId == "1" ? true : false}
+								text="PokeQuiz"
 							/>
-							<h1
-								className={`font-semibold text-lg ${
-									hoverId == "1" ? "block" : "hidden"
-								}`}
-							>
-								Pokedex
-							</h1>
+					
 						</div>
 						<div
-							className="text-center"
+							className="my-14"
 							id="2"
 							onMouseEnter={() => handleMouseEnter("2")}
 							onMouseLeave={() => handleMouseLeave("2")}
 						>
 							<div className="flex flex-col items-center">
 								<PokeBall
-									link={"/QuizOptions"}
-									color={pokeRed}
+									link={"PokeData/1"}
+									color={"pokeRed"}
 									isHover={hoverId == "2" ? true : false}
-								
+									text={"PokeDex"}
 								/>
-								<h1
-									className={`font-semibold text-lg ${
-										hoverId == "2" ? "block" : "hidden"
-									}`}
-								>
-									Pokewhich
-								</h1>
+								{/* <h1 className={`font-semibold text-lg `}>Pokewhich</h1> */}
 							</div>
 						</div>
 					</div>

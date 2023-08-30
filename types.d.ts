@@ -169,7 +169,6 @@ interface Color{
     answers: string[];
     correctAnswer: string;
     randomPicture: string;
-    shinyPicture: string;
 }
 
 interface PokemonArtworkQuiz {
