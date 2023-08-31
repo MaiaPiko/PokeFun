@@ -1,13 +1,12 @@
 "use client";
 import Head from "next/head";
-import Image from "next/image";
 import { Metadata } from "next";
-import Box from "./components/PokeBall";
 import PokeBall from "./components/PokeBall";
-
+import getRandomId from "@/lib/getRandomId";
 import RandomPokemonSprite from "./components/RandomPokeSprite";
 import LoadingPokeBall from "./components/LoadingPokeBall";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import fetchPokemonArtwork from "@/lib/fetchPokemonArtwork";
 
 export const metadata: Metadata = {
 	title: "Pokefun",
@@ -15,11 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-	const pokeBlue = "#0000a3";
-	const pokeRed = "#ed1e25";
-	const pokeYellow = "#ffbf00";
+	
 	const [hoverId, setHoverId] = useState<string>("0");
-
 	const [isHover, setIsHover] = useState(false);
 	const handleMouseEnter = (id: string) => {
 		setHoverId(id);
@@ -31,30 +27,44 @@ export default function Home() {
 
 	return (
 		<>
+			<Head>
+				<link rel="shortcut icon" href="/static/favicon.ico" />
+			</Head>
 			<main>
-				<div className={`flex justify-center  
-				`}>
+				<div
+					className={`flex justify-center  
+				`}
+				>
 					<div
-						className={`flex  items-center sm:flex-col md:flex-row 
+						className={`flex  items-center md:my-20 md:flex-row flex-col space-x-9
 						
 						`}
 					>
 						<div
-							className=" my-14"
+							className=" my-14 relative"
 							id="1"
 							onMouseEnter={() => handleMouseEnter("1")}
 							onMouseLeave={() => handleMouseLeave("1")}
 						>
+						
+							{/* <Image
+							src={image}
+							alt="pokemon"
+							width={300}
+							height={300}
+							className={`absolute inset-0 transition-opacity ${
+								hoverId=="1" ? "opacity-100" : "opacity-0"
+							  }`}
+							/> */}
 							<PokeBall
 								link={"/QuizOptions"}
 								color={"pokeBlue"}
 								isHover={hoverId == "1" ? true : false}
 								text="PokeQuiz"
 							/>
-					
 						</div>
 						<div
-							className="my-14"
+							className="md:my-14 my-8"
 							id="2"
 							onMouseEnter={() => handleMouseEnter("2")}
 							onMouseLeave={() => handleMouseLeave("2")}

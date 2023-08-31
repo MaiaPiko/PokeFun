@@ -37,7 +37,7 @@ export default function QuizOptions() {
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center space-y-4">
+		<div className="flex flex-col items-center justify-center space-y-4 h-80" style={{height:"50vh"}}>
 			<label className="font-semibold text-lg">Number of Questions:</label>
 
 			<div>

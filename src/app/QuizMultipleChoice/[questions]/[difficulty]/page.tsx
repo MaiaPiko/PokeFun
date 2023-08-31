@@ -7,10 +7,11 @@ import getRandomId from "@/lib/getRandomId";
 import shuffle from "@/lib/shuffle";
 import fetchPokemonArtwork from "@/lib/fetchPokemonArtwork";
 import fetchPokeInfo from "@/lib/fetchPokeInfo";
+import pokeBall from "../../../../../public/pokeball.svg"
 import { Suspense } from "react";
 import LoadingPokeBall from "../../../components/LoadingPokeBall";
 import fetchPokemonArtworkQuiz from "@/lib/fetchPokeArtQuiz";
-
+import ProgressBar from "../../components/ProgressBar";
 type Params = {
 	params: {
 		questions: string;
@@ -28,15 +29,37 @@ export default function PokeWhich({
 	const [disableButton, setDisableButton] = useState(false);
 	const [dataFetched, setDataFetched] = useState(false);
 	const [userChoice, setUserChoice] = useState("");
-	const [answeredQuestions, setAnsweredQuestions] = useState(0);
-
+	const [answeredQuestions, setAnsweredQuestions] = useState(1);
+	const [goodScore, setGoodScore] = useState<boolean>(false);
 	const [data, setData] = useState<PokemonQuizData>({
 		answers: [],
 		correctAnswer: "",
 		randomPicture: "",
 	});
+
+	const [endGamePicture, setEndGamePicture] = useState("");
+
 	const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 	const [gameFinish, setGameFinish] = useState<boolean>(false);
+
+
+	const fetchGameEndPictures = async (goodScore:boolean) => {
+		const sadPoke = "oranguru";
+		const happyPoke = "pikachu";
+		
+		let endPicture; 
+		if (goodScore==true) {
+		  endPicture = await fetchPokemonArtwork(happyPoke); 
+		  setEndGamePicture(endPicture); 
+
+		} else if(goodScore==false) {
+		  endPicture = await fetchPokemonArtwork(sadPoke); 
+		  setEndGamePicture(endPicture); 
+
+		}
+	  
+	  };
+	  console.log(data.correctAnswer)
 
 
 	const fetchData = async () => {
@@ -45,7 +68,6 @@ export default function PokeWhich({
 		const correctAnswer = (await fetchPokeInfo(randomId)).name;
 		const randomId2 = getRandomId([randomId]);
 		const randomPokemon = (await fetchPokeInfo(randomId2)).name;
-
 		let randomId3, randomId4;
 		let answers = [];
 		if (questionDifficulty !== "easy") {
@@ -66,10 +88,10 @@ export default function PokeWhich({
 				answers,
 				correctAnswer,
 				randomPicture,
+	
 			});
 		}
 		setDataFetched(true);
-
 	};
 
 	useEffect(() => {
@@ -81,13 +103,11 @@ export default function PokeWhich({
 	}, []);
 
 
+	
+
 	const handleClick = (answer: string) => {
 		setDisableButton(true);
 		setUserChoice(answer);
-		setAnsweredQuestions(answeredQuestions + 1);
-		if (totalQuestions < answeredQuestions) {
-			setGameFinish(true);
-		}
 
 		if (answer === data.correctAnswer) {
 			setIsCorrect(true);
@@ -95,9 +115,16 @@ export default function PokeWhich({
 		} else {
 			setIsCorrect(false);
 		}
+
+		if (totalQuestions <= answeredQuestions - 1) {
+			setGameFinish(true);
+		}
 	};
 
 	const handleNext = () => {
+		if (!gameFinish) {
+			setAnsweredQuestions(answeredQuestions + 1);
+		}
 		if (!gameFinish) {
 			try {
 				fetchData();
@@ -107,17 +134,36 @@ export default function PokeWhich({
 			setDisableButton(false);
 			setUserChoice("");
 		}
+		if (totalQuestions === answeredQuestions) {
+			setGameFinish(true);
+			const userScore = (score/totalQuestions)*100
+			if(userScore> 50){
+				setGoodScore(true)
+			}
+			else{
+				setGoodScore(false)
+			}
+			fetchGameEndPictures(userScore> 50);
+		}
 	};
+	const wrongAnswers =  answeredQuestions - 1 - score;
+	const incorrectAnswers = wrongAnswers<0 ? 0: wrongAnswers;
 	return (
 		<>
 			{!gameFinish ? (
 				<>
-					<div className="flex justify-center">
+					<div className="flex justify-center mt-8">
 						{dataFetched ? (
 							<div>
-								<p>
-									Score:{score}/{totalQuestions}
-								</p>
+								<div className=" flex flex-row justify-center">
+									<p className="text-green-500 font-bold text-lg ">
+										&#x2713; : {score}
+									</p>
+									<p className="text-red-500 font-bold ps-10">
+										&#9587; : {incorrectAnswers}{" "}
+									</p>
+								</div>
+
 								<div className="relative">
 									{userChoice ? (
 										<div>
@@ -168,10 +214,10 @@ export default function PokeWhich({
 												left: "50%",
 												transform: "translate(-50%, -50%) scale(1.2)",
 												transition: "transform 0.6s",
-												boxShadow:
-													"0 0 120px 30px rgba(255,255,0, 0.3), " +
-													"0 0 200px 100px rgba(255,255, 51,  0.5), " +
-													"0 0 280px 180px rgba(255, 255, 51, 0.3)",
+												// 	boxShadow:
+												// 		"0 0 120px 30px rgba(255,255,0, 0.3), " +
+												// 		"0 0 200px 100px rgba(255,255, 51,  0.5), " +
+												// 		"0 0 280px 180px rgba(255, 255, 51, 0.3)",
 											}}
 										></div>
 									)}
@@ -183,11 +229,21 @@ export default function PokeWhich({
 										priority
 										className="pb-5"
 									/>
+
+									<p className="text-center pb-8 text-slate-800">
+										{answeredQuestions}/{totalQuestions}
+									</p>
 								</div>
 							</div>
-						) : (
-							<div className="flex justify-center mt-20 h-screen ">
-								<LoadingPokeBall text="loading..." />
+						) 
+						: (
+							// <div className="flex justify-center flex-col mt-20">
+							// 	<Image src={pokeBall} alt="pokeball" width={100} height={100}/>
+							// 	{/* <p>loading</p> */}
+							// </div>
+
+							<div >
+								<LoadingPokeBall text="loading..."/>
 							</div>
 						)}
 					</div>
@@ -208,6 +264,8 @@ export default function PokeWhich({
 					? isCorrect
 						? "disabled:text-green-500 disabled:border-green-500"
 						: "disabled:text-pokeRed disabled:border-red-500 disabled:hover:bg-transparent"
+					: answer === data.correctAnswer
+					? "text-green-500 border-green-500 hover:bg-green-100"
 					: " disabled:border-slate-500 disabled:text-slate-500"
 				: "bg-transparent hover:bg-pokeRed hover:text-white=800 text-pokeRed hover:text-white border border-pokeRed hover:border-pokeRed"
 		}
@@ -248,11 +306,30 @@ export default function PokeWhich({
 				</>
 			) : (
 				<>
-					<div className="flex justify-center">
-						<p> Your score is {score} </p>
+									<div className="flex justify-center mt-8">
+
+					<div className="flex flex-col justify-center space-y-1 items-center">
+						<p className="text-xl text-center"> Your Score is {(score/totalQuestions)*100}%</p>
+					{endGamePicture &&
+						<Image
+										src={endGamePicture}
+										alt={`organguru`}
+										width={400}
+										height={400}
+										priority
+										className="pb-5"
+									/>}
 						<Link href={"/QuizOptions"}>
-							<button>Play Again?</button>
+							<button
+							
+								className="text-center text-white bg-pokeRed w-60 py-2  text-center font-semibold rounded disabled:border
+							"
+							>
+								{" "}
+								Play Again?
+							</button>
 						</Link>
+					</div>
 					</div>
 				</>
 			)}

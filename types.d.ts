@@ -136,6 +136,7 @@ interface Color{
     order:number;
     shape: Shape;
     color:Color;
+    types:string[]
 
   }
 
@@ -169,9 +170,12 @@ interface Color{
     answers: string[];
     correctAnswer: string;
     randomPicture: string;
+ 
 }
 
 interface PokemonArtworkQuiz {
   officialDefault: string;
   officialShiny: string;
 }
+
+
