@@ -1,6 +1,6 @@
 "use client";
 import Head from "next/head";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 import PokeBall from "./components/PokeBall";
 import getRandomId from "@/lib/getRandomId";
 import RandomPokemonSprite from "./components/RandomPokeSprite";
@@ -8,10 +8,10 @@ import LoadingPokeBall from "./components/LoadingPokeBall";
 import { useEffect, useState } from "react";
 import fetchPokemonArtwork from "@/lib/fetchPokemonArtwork";
 
-export const metadata: Metadata = {
-	title: "Pokefun",
-	description: "Pokemon fun time",
-};
+// export const metadata: Metadata = {
+// 	title: "Pokefun",
+// 	description: "Pokemon fun time",
+// };
 
 export default function Home() {
 	
