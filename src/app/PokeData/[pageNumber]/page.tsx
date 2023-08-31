@@ -28,7 +28,7 @@ export default async function PokemonList({ params: { pageNumber } }: Params) {
 			<div className="flex flex-col items-center justify-center">
 				<h1 className="title text-4xl p-4">Pokémons</h1>
 				<div className="md:w-2/3 lg:w-3/4 xl:w-4/5 mx-auto">
-					<Suspense fallback={<LoadingPokeBall text="loading..."/>}/>
+					{/* <Suspense fallback={<LoadingPokeBall text="loading..."/>}/> */}
 					<ul className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
 						{pokemons.map((pokemon, index) => (
 							<div  key={pokemon.name} className="flex items-center">
