@@ -3,6 +3,7 @@ interface Pokemon {
     url: string;
     base_happiness: number;
     sprites: PokemonSprite;
+    id:number;
 
     
   }
@@ -25,6 +26,7 @@ interface Pokemon {
     sprites:string;
     ability:string;
     abilities: Ability[];
+    id:number;
 
   
   }
@@ -136,7 +138,8 @@ interface Color{
     order:number;
     shape: Shape;
     color:Color;
-    types:string[]
+    types:string[];
+    id:number
 
   }
 

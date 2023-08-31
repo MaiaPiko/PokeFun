@@ -67,7 +67,7 @@ console.log(currentPage)
 				<ul className="m-1 relative pt-4 mr-0 text-base text-gray-700 md:flex md:pt-0  shadow-xl md:shadow-none">
 					<li onClick={handleMenuToggle}>
 						<Link
-							className= {`block  p-3 pr-4   rounded  ${currentPage== "/QuizOptions" || currentPage.includes("/QuizMultipleChoice/")? "bg-pokeRed text-white":" text-slate-800"}`}
+							className= {`block  p-3   rounded  ${currentPage== "/QuizOptions" || currentPage.includes("/QuizMultipleChoice/")? "bg-pokeRed text-white":" text-slate-800"}`}
 							href="/QuizOptions/"
 						>
 							PokeQuiz
@@ -75,7 +75,7 @@ console.log(currentPage)
 					</li>
 					<li onClick={handleMenuToggle}>
 						<Link
-							className= {`block  p-3 pr-4   rounded  ${currentPage.includes("/PokeData/")? "bg-pokeRed text-white":" text-slate-800"}`}
+							className= {`block  p-3 mr-2 rounded  ${currentPage.includes("/PokeData/")? "bg-pokeRed text-white":" text-slate-800"}`}
 							href="/PokeData/1"
 						>
 							PokeDex

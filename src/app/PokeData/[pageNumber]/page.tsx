@@ -34,7 +34,7 @@ export default async function PokemonList({ params: { pageNumber } }: Params) {
 							<div  key={pokemon.name} className="flex items-center">
 							<li key={pokemon.name}>
 								<Link
-									href={`../PokemonInfo/${pokemon.name}`}
+									href={`../PokemonInfo/${pokemon.id}`}
 									key={index + pokemon.name}
 									className="flex items-center"
 								>

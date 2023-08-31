@@ -16,8 +16,11 @@ type Params = {
 };
 
 export default async function PokeDetails({ params: { pokemon } }: Params) {
+
+
 	const pokeData = await fetchPokeInfo(pokemon);
 	// const pokeInfo = pokeData.results;
+	const pokeName = pokeData.name
 	const pokeHappiness: number = pokeData.base_happiness;
 	// const flavorText= pokeData.flavor_text_entries[0].flavor_text
 	const captureRate = pokeData.capture_rate;
@@ -34,8 +37,8 @@ export default async function PokeDetails({ params: { pokemon } }: Params) {
 	const image = await fetchPokemonArtwork(pokemon);
 	const nextId = id < 1010 ? (id + 1).toString() : (1).toString();
 	const previousId = id > 1 ? (id - 1).toString() : (1010).toString();
-	const previousPoke = (await fetchPokeInfo(previousId)).name;
-	const nextPoke = (await fetchPokeInfo(nextId)).name;
+	// const previousPoke = (await fetchPokeInfo(previousId)).name;
+	// const nextPoke = (await fetchPokeInfo(nextId)).name;
 	const pokeTypes = await fetchPokeTypes(pokemon)
 
 	
@@ -51,7 +54,7 @@ export default async function PokeDetails({ params: { pokemon } }: Params) {
 					{pokeData ? (
 						<>
 							<div className="flex items-center justify-center pt-2">
-								<Link href={`../PokemonInfo/${previousPoke}`}>
+								<Link href={`../PokemonInfo/${previousId}`}>
 									<Image
 										className="cursor-pointer"
 										src={arrowLeft}
@@ -60,7 +63,7 @@ export default async function PokeDetails({ params: { pokemon } }: Params) {
 										height={30}
 									/>
 								</Link>
-								<Link href={`../PokemonInfo/${nextPoke}`}>
+								<Link href={`../PokemonInfo/${nextId}`}>
 									<Image
 										src={arrowLeft}
 										className="rotate-180 cursor-pointer"
@@ -73,7 +76,7 @@ export default async function PokeDetails({ params: { pokemon } }: Params) {
 
 							<div className="bg-white m-5 rounded-xl ">
 								<h1 className="text-4xl	ps-10 pt-10 font-bold ">
-									{capitalize(pokemon)}
+									{capitalize(pokeName)}
 								</h1>
 
 								<div className="flex items-center justify-center space-x-0 pb-5 ">
