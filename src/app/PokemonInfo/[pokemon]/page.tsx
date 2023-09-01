@@ -74,13 +74,13 @@ export default async function PokeDetails({ params: { pokemon } }: Params) {
 								</Link>
 							</div>
 
-							<div className="bg-white m-5 rounded-xl ">
-								<h1 className="text-4xl	ps-10 pt-10 font-bold ">
+							<div className="bg-white md:m-5  md:rounded-xl ">
+								<h1 className="text-4xl	ms-5 md:ps-10 pt-10 font-bold text-center md:text-justify">
 									{capitalize(pokeName)}
 								</h1>
 
-								<div className="flex items-center justify-center space-x-0 pb-5 ">
-									<div className="w-1/2 ps-10 font-bold	text-slate-800 ">
+								<div className="flex m-5 md:items-center md:justify-center md:space-x-0 md:pb-5 flex-col md:flex-row">
+									<div className="md:w-1/2 md:ps-10 font-bold	text-slate-800 text-center md:text-justify">
 										<p>Id: {id} </p>
 										<p>Order: {order}</p>
 										<p>Type: {pokeTypes}</p>
@@ -132,7 +132,7 @@ export default async function PokeDetails({ params: { pokemon } }: Params) {
 											fallback={<LoadingPokeBall text="loading..." />}
 										/>
 
-										<div className="-translate-y-5 ">
+										<div className="md:-translate-y-5 translate-x-20 md:translate-x-0">
 											<Image
 												src={image}
 												alt={`${pokemon} Image`}

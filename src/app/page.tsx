@@ -36,7 +36,7 @@ export default function Home() {
 				`}
 				>
 					<div
-						className={`flex  items-center md:my-20 md:flex-row flex-col space-x-9
+						className={`flex  items-center md:my-20 md:flex-row flex-col md:space-x-9
 						
 						`}
 					>
@@ -64,7 +64,7 @@ export default function Home() {
 							/>
 						</div>
 						<div
-							className="md:my-14 my-8"
+							className="md:my-14 my-8 relative"
 							id="2"
 							onMouseEnter={() => handleMouseEnter("2")}
 							onMouseLeave={() => handleMouseLeave("2")}
