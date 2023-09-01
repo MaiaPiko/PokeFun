@@ -15,6 +15,9 @@ const config: Config = {
         'pokeYellow':'#ffbf00',
         
       },
+      boxShadow: {
+        'custom': '2px 2px 20px 10px rgba(0, 0, 0, 0.2)',
+      },
     },
   },
   plugins: [],

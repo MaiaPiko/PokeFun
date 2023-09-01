@@ -16,11 +16,9 @@ type Params = {
 };
 
 export default async function PokeDetails({ params: { pokemon } }: Params) {
-
-
 	const pokeData = await fetchPokeInfo(pokemon);
 	// const pokeInfo = pokeData.results;
-	const pokeName = pokeData.name
+	const pokeName = pokeData.name;
 	const pokeHappiness: number = pokeData.base_happiness;
 	// const flavorText= pokeData.flavor_text_entries[0].flavor_text
 	const captureRate = pokeData.capture_rate;
@@ -39,18 +37,14 @@ export default async function PokeDetails({ params: { pokemon } }: Params) {
 	const previousId = id > 1 ? (id - 1).toString() : (1010).toString();
 	// const previousPoke = (await fetchPokeInfo(previousId)).name;
 	// const nextPoke = (await fetchPokeInfo(nextId)).name;
-	const pokeTypes = await fetchPokeTypes(pokemon)
+	const pokeTypes = await fetchPokeTypes(pokemon);
 
-	
 	// Set the animation active after a short delay
 
 	return (
 		<>
 			<div className="flex justify-center my-20  ">
-				<div className="mt-1 items-center bg-pokeRed rounded-xl shadow-xl"
-				style={{
-					boxShadow: "2px 2px 20px 10px rgba(0, 0, 0, 0.2)"
-				}}>
+				<div className="mt-1 items-center md:bg-pokeRed rounded-xl md:shadow-xl bg-transparent md:shadow-custom">
 					{pokeData ? (
 						<>
 							<div className="flex items-center justify-center pt-2">
