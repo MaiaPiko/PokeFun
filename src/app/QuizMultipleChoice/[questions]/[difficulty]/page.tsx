@@ -59,7 +59,7 @@ export default function PokeWhich({
 		}
 	  
 	  };
-	  console.log(data.correctAnswer)
+	//   console.log(data.correctAnswer)
 
 
 	const fetchData = async () => {
