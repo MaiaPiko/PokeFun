@@ -70,7 +70,7 @@ console.log(currentPage)
 							className= {`block  p-3   rounded  ${currentPage== "/QuizOptions" || currentPage.includes("/QuizMultipleChoice/")? "bg-pokeRed text-white":" text-slate-800"}`}
 							href="/QuizOptions/"
 						>
-							PokeQuiz
+							PokéQuiz
 						</Link>
 					</li>
 					<li onClick={handleMenuToggle}>
@@ -78,7 +78,7 @@ console.log(currentPage)
 							className= {`block  p-3 mr-2 rounded  ${currentPage.includes("/PokeData/")? "bg-pokeRed text-white":" text-slate-800"}`}
 							href="/PokeData/1"
 						>
-							PokeDex
+							PokéDex
 						</Link>
 					</li>
 

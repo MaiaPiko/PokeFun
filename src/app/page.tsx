@@ -60,7 +60,7 @@ export default function Home() {
 								link={"/QuizOptions"}
 								color={"pokeBlue"}
 								isHover={hoverId == "1" ? true : false}
-								text="PokeQuiz"
+								text="PokéQuiz"
 							/>
 						</div>
 						<div
@@ -74,7 +74,7 @@ export default function Home() {
 									link={"PokeData/1"}
 									color={"pokeRed"}
 									isHover={hoverId == "2" ? true : false}
-									text={"PokeDex"}
+									text={"PokéDex"}
 								/>
 								{/* <h1 className={`font-semibold text-lg `}>Pokewhich</h1> */}
 							</div>
