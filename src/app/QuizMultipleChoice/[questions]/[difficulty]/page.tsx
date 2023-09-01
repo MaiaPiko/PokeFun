@@ -309,7 +309,7 @@ export default function PokeWhich({
 									<div className="flex justify-center mt-8">
 
 					<div className="flex flex-col justify-center space-y-1 items-center">
-						<p className="text-xl text-center"> Your Score is {(score/totalQuestions)*100}%</p>
+					<p className="text-xl text-center"> Your Score is {((score / totalQuestions) * 100).toFixed(0)}%</p>
 					{endGamePicture &&
 						<Image
 										src={endGamePicture}
