@@ -290,17 +290,19 @@ export default function PokeWhich({
 									)}
 								</div>
 							))}
-							{userChoice && (
+							
 								<button
 									onClick={() => {
 										handleNext();
 									}}
-									className="text-white bg-pokeRed w-60 py-2 px-4 text-center font-semibold rounded disabled:border
-							"
+									className={`text-white  w-60 py-2 px-4 text-center font-semibold rounded mb-2 ${userChoice? "bg-pokeRed":"bg-transparent"}
+							`}
+							disabled={!userChoice}
 								>
+									
 									Next
 								</button>
-							)}
+							
 						</div>
 					</div>
 				</>
