@@ -69,7 +69,7 @@ export default function Home() {
 							onMouseEnter={() => handleMouseEnter("2")}
 							onMouseLeave={() => handleMouseLeave("2")}
 						>
-							<div className="flex flex-col items-center">
+							<div className="flex flex-col items-center mb-2 md:mb-0">
 								<PokeBall
 									link={"PokeData/1"}
 									color={"pokeRed"}
