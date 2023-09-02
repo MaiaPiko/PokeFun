@@ -23,21 +23,12 @@ export default function PokeBall({
 	const chosenColor =
 		color === "pokeBlue" ? "rgb(43,111,236)" : color === "pokeRed" ? "#ed1e25" : color;
 
-	const screenWidth = typeof window !== "undefined" ? window.innerWidth : 0;
-	const [screenSmall, setScreenSmall] = useState(false);
-	const checkScreen = () => {
-		if (screenWidth != 0 && screenWidth < 1200) console.log(screenWidth);
-		setScreenSmall(true);
-	};
-
-	useEffect(() => {
-		checkScreen();
-	}, []);
+	
 	const width = 40;
 	
 	const fetchPictures = async () => {
 		const poke1 = "dewgong";
-		// const poke1 = "mewtwo";
+	
 
 		const pokePicture1 = await fetchPokemonArtwork(poke1);
 		setImage1(pokePicture1);
