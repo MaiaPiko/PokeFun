@@ -1,5 +1,5 @@
 import React from "react";
-import LoadingPokeBall from "../components/LoadingPokeBall";
+import LoadingPokeBall from "../../../components/LoadingPokeBall";
 
 export default function loading() {
 	return (
