@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import getRandomId from "@/lib/getRandomId";
@@ -12,6 +12,10 @@ import { Suspense } from "react";
 import LoadingPokeBall from "../../../components/LoadingPokeBall";
 import fetchPokemonArtworkQuiz from "@/lib/fetchPokeArtQuiz";
 import ProgressBar from "../../components/ProgressBar";
+import { GlobalLayoutRouterContext } from "next/dist/shared/lib/app-router-context";
+import GlowCorrect from "../../components/Glow/GlowCorrect";
+import GlowIncorrect from "../../components/Glow/GlowIncorrect";
+import Choices from "../../components/Choices";
 type Params = {
 	params: {
 		questions: string;
@@ -136,158 +140,60 @@ export default function PokeWhich({
 			fetchGameEndPictures(userScore > 50);
 		}
 	};
+
 	const wrongAnswers = answeredQuestions - 1 - score;
 	const incorrectAnswers = wrongAnswers < 0 ? 0 : wrongAnswers;
 	return (
 		<>
 			{!gameFinish ? (
 				<>
-				{dataFetched? (
-					<>
-					<div className="flex justify-center mt-8">
-						<div>
-							<div className=" flex flex-row justify-center">
-								<p className="text-green-500 font-bold text-lg ">
-									&#x2713; : {score}
-								</p>
-								<p className="text-red-500 font-bold ps-10">
-									&#9587; : {incorrectAnswers}{" "}
-								</p>
-							</div>
-
-							<div className="relative">
-								{userChoice ? (
-									<div>
-										{isCorrect ? (
-											<div
-												className={`rounded-full bg-transparent hover:transition-shadow hover:ease-in hover:duration-600 hover:block }`}
-												id="glow"
-												style={{
-													position: "absolute",
-													zIndex: "-1",
-													top: "50%",
-													left: "50%",
-													transform: "translate(-50%, -50%) scale(1.2)",
-													transition: "transform 0.6s",
-													boxShadow:
-														"0 0 120px 60px rgba(255,255,0, 0.3), " +
-														"0 0 200px 120px rgba(80,200, 120,  0.5), " +
-														"0 0 280px 180px rgba(245, 245, 220, 0.3)",
-												}}
-											></div>
-										) : (
-											<div
-												className={`rounded-full bg-transparent hover:transition-shadow hover:ease-in hover:duration-600 hover:block }`}
-												id="glow"
-												style={{
-													position: "absolute",
-													zIndex: "-1",
-													top: "50%",
-													left: "50%",
-													transform: "translate(-50%, -50%) scale(1.2)",
-													transition: "transform 0.6s",
-													boxShadow:
-														"0 0 120px 30px rgba(255,255,0, 0.3), " +
-														"0 0 200px 100px rgba(255,51, 51,  0.5), " +
-														"0 0 280px 180px rgba(245, 51, 51, 0.3)",
-												}}
-											></div>
-										)}
+					{dataFetched ? (
+						<>
+							<div className="flex justify-center mt-8">
+								<div>
+									<div className=" flex flex-row justify-center">
+										<p className="text-green-500 font-bold text-lg ">
+											&#x2713; : {score}
+										</p>
+										<p className="text-red-500 font-bold ps-10">
+											&#9587; : {incorrectAnswers}{" "}
+										</p>
 									</div>
-								) : (
-									<div
-										className={`rounded-full bg-transparent hover:transition-shadow hover:ease-in hover:duration-600 hover:block }`}
-										id="glow"
-										style={{
-											position: "absolute",
-											zIndex: "-1",
-											top: "50%",
-											left: "50%",
-											transform: "translate(-50%, -50%) scale(1.2)",
-											transition: "transform 0.6s",
-											// 	boxShadow:
-											// 		"0 0 120px 30px rgba(255,255,0, 0.3), " +
-											// 		"0 0 200px 100px rgba(255,255, 51,  0.5), " +
-											// 		"0 0 280px 180px rgba(255, 255, 51, 0.3)",
-										}}
-									></div>
-								)}
-								<Image
-									src={data.randomPicture}
-									alt={`random Image`}
-									width={400}
-									height={400}
-									priority
-									className="pb-5"
-								/>
 
-								<p className="text-center pb-8 text-slate-800">
-									{answeredQuestions}/{totalQuestions}
-								</p>
-							</div>
-						</div>
-					</div>
-					<div className="flex justify-center"></div>
-					<div className="flex justify-center">
-						<div className="grid grid-cols-1 gap-1">
-							{data.answers.map((answer, index) => (
-								<div key={index} className="flex content-start">
-									<button
-										key={index}
-										onClick={() => handleClick(answer)}
-										disabled={disableButton}
-										className={`
-    w-60 py-2 px-4 text-center font-semibold rounded disabled:border
-    ${
-			userChoice
-				? answer == userChoice
-					? isCorrect
-						? "disabled:text-green-500 disabled:border-green-500"
-						: "disabled:text-pokeRed disabled:border-red-500 disabled:hover:bg-transparent"
-					: answer === data.correctAnswer
-					? "text-green-500 border-green-500 hover:bg-green-100"
-					: " disabled:border-slate-500 disabled:text-slate-500"
-				: "bg-transparent hover:bg-pokeRed hover:text-white=800 text-pokeRed hover:text-white border border-pokeRed hover:border-pokeRed"
-		}
-   
-  `}
-									>
-										{answer}
-									</button>
-									{userChoice && (
-										<>
-											{isCorrect && answer === data.correctAnswer && (
-												<p className="ps-48 text-green-500 font-bold pt-3 text-lg ps-2 absolute">
-													&#x2713;
-												</p>
-											)}
-											{!isCorrect && userChoice === answer && (
-												<p className="ps-48 text-red-500 font-bold pt-3  ps-2 absolute">
-													&#9587;
-												</p>
-											)}
-										</>
-									)}
+									<div className="relative">
+										{userChoice && (
+											<div>
+												{isCorrect ? <GlowCorrect /> : <GlowIncorrect />}
+											</div>
+										)}
+										<Image
+											src={data.randomPicture}
+											alt={`random Image`}
+											width={400}
+											height={400}
+											priority
+											className="pb-5"
+										/>
+
+										<p className="text-center pb-8 text-slate-800">
+											{answeredQuestions}/{totalQuestions}
+										</p>
+									</div>
 								</div>
-							))}
+							</div>
 
-							<button
-								onClick={() => {
-									handleNext();
-								}}
-								className={`text-white  w-60 py-2 px-4 text-center font-semibold rounded mb-2 ${
-									userChoice ? "bg-pokeRed" : "bg-transparent"
-								}
-							`}
-								disabled={!userChoice}
-							>
-								Next
-							</button>
-						</div>
-					</div>
-					</>)
-					:
-					(<LoadingPokeBall text="loading..."/>)}
+							<Choices
+								isCorrect={isCorrect}
+								handleClick={handleClick}
+								data={data}
+								disableButton={disableButton}
+								userChoice={userChoice}
+								handleNext={handleNext}
+							/>
+						</>
+					) : (
+						<LoadingPokeBall text="loading..." />
+					)}
 				</>
 			) : (
 				<>
