@@ -45,7 +45,8 @@ export default function Home() {
 							id="1"
 							onMouseEnter={() => handleMouseEnter("1")}
 							onMouseLeave={() => handleMouseLeave("1")}
-							onClick={() => handleMouseEnter("1")}
+							onFocus={() => handleMouseEnter("1")}
+							onBlur={()=> handleMouseLeave("1")}
 
 						>
 						
@@ -70,7 +71,8 @@ export default function Home() {
 							id="2"
 							onMouseEnter={() => handleMouseEnter("2")}
 							onMouseLeave={() => handleMouseLeave("2")}
-							onClick={() => handleMouseEnter("2")}
+							onFocus={() => handleMouseEnter("2")}
+							onBlur={() => handleMouseLeave("2")}
 						>
 							<div className="flex flex-col items-center mb-4 md:mb-0">
 								<PokeBall

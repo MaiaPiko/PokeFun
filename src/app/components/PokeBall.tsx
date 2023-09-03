@@ -64,8 +64,8 @@ export default function PokeBall({
 						id="container"
 					>
 						<div
-							className={`z-0 absolute top-0 left-0 
-								w-full h-${width} border-8 rounded-t-full  border-black`}
+							className={` absolute top-0 left-0 
+								w-full h-${width} border-8 rounded-t-full  border-black ${isHover?"z-0":"z-10"}`}
 							style={{
 								backgroundColor: chosenColor,
 								transform: isHover ? "translateY(-50px)" : "translateY(0)",
