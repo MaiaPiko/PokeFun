@@ -112,7 +112,7 @@ export default function QuizOptions() {
 						checked={gameDifficulty === "hard" ? true : false}
 
 					/>
-					<label> difficult</label>
+					<label> hard</label>
 				</div>
 
 
