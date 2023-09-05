@@ -172,7 +172,7 @@ export default function PokeWhich({
 											width={400}
 											height={400}
 											priority
-											className="pb-5"
+											className={`pb-5 ${questionDifficulty=="hard" && !userChoice?'contrast-75 brightness-0':""}`}
 										/>
 
 										<p className="text-center pb-8 text-slate-800">

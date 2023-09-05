@@ -116,8 +116,8 @@ export default function PokeBall({
 						alt="pokemon"
 						width={300}
 						height={300}
-						className={`z-10 absolute inset-0 transition-opacity ${
-							isHover? "opacity-100" : "opacity-0"
+						className={` absolute inset-0 transition-opacity ${
+							isHover? "opacity-100 z-10" : "opacity-0 z-0"
 						  }`}
 						/>
 							<h1 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-9 text-center z-50 buttom-0 text-xl">

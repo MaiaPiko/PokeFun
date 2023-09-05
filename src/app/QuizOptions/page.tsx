@@ -101,6 +101,21 @@ export default function QuizOptions() {
 					<label> normal</label>
 				</div>
 
+				<div>
+					<input
+						type="radio"
+						id="hard"
+						value="hard"
+						className="accent-pokeRed"
+						onChange={handleDifficulty}
+						name="difficulty"
+						checked={gameDifficulty === "hard" ? true : false}
+
+					/>
+					<label> Difficult</label>
+				</div>
+
+
 		
 			</fieldset>
 
