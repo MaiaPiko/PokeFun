@@ -71,7 +71,7 @@ export default function PokeWhich({
 		setUsedNumbers([...usedNumbers, randomId]);
 		const randomPicture = await fetchPokemonArtwork(randomId);
 		const correctAnswer = (await fetchPokeInfo(randomId)).name;
-		console.log(correctAnswer)
+		// console.log(correctAnswer)
 		const randomId2 = getRandomId([randomId]);
 		const randomPokemon = (await fetchPokeInfo(randomId2)).name;
 		let randomId3, randomId4;
