@@ -48,6 +48,7 @@ export default function PokeWhich({
 
 	const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 	const [gameFinish, setGameFinish] = useState<boolean>(false);
+	const [randomRotate, setRandomRotate] = useState("rotate-0")
 
 	const fetchGameEndPictures = async (goodScore: boolean) => {
 		const sadPoke = "oranguru";
@@ -97,6 +98,9 @@ export default function PokeWhich({
 		if(!gameFinish){
 			setAnsweredQuestions(answeredQuestions + 1);
 			
+		}
+		if(difficulty=="expert"){
+			setRandomRotate(shuffle(["rotate-12", "rotate-45", "rotate-90", "rotate-180"])[1])
 		}
 	};
 
@@ -150,6 +154,7 @@ export default function PokeWhich({
 
 	const wrongAnswers = answeredQuestions - 1 - score;
 	const incorrectAnswers = wrongAnswers < 0 ? 0 : wrongAnswers;
+	
 	return (
 		<>
 			{!gameFinish ? (
@@ -180,7 +185,7 @@ export default function PokeWhich({
 											height={400}
 											priority
 											className={`pb-5 ${questionDifficulty=="hard" && !userChoice && !nextQuestion?'contrast-75 brightness-0':
-										difficulty=="expert" && !userChoice && !nextQuestion? "blur-md contrast-75 brightness-0 rotate-90":""}`}
+											difficulty=="expert" && !userChoice && !nextQuestion? `blur-md contrast-75 brightness-0 ${randomRotate}`:""}`}
 										/>
 
 										<p className="text-center pb-8 text-slate-800">
