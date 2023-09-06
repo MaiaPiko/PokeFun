@@ -69,6 +69,7 @@ export default function PokeWhich({
 		setUsedNumbers([...usedNumbers, randomId]);
 		const randomPicture = await fetchPokemonArtwork(randomId);
 		const correctAnswer = (await fetchPokeInfo(randomId)).name;
+		console.log(correctAnswer)
 		const randomId2 = getRandomId([randomId]);
 		const randomPokemon = (await fetchPokeInfo(randomId2)).name;
 		let randomId3, randomId4;
@@ -95,10 +96,7 @@ export default function PokeWhich({
 		}
 		setDataFetched(true);
 		setNextQuestion(false);
-		if(!gameFinish){
-			setAnsweredQuestions(answeredQuestions + 1);
-			
-		}
+
 		if(difficulty=="expert"){
 			setRandomRotate(shuffle(["rotate-12", "rotate-45", "rotate-90", "rotate-180"])[1])
 		}
@@ -130,6 +128,7 @@ export default function PokeWhich({
 
 	const handleNext = () => {
 		setNextQuestion(true)
+		setAnsweredQuestions(answeredQuestions + 1);
 
 		if (!gameFinish) {
 			try {
