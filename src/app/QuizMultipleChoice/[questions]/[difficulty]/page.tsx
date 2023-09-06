@@ -36,6 +36,7 @@ export default function PokeWhich({
 	const [userChoice, setUserChoice] = useState("");
 	const [answeredQuestions, setAnsweredQuestions] = useState(1);
 	const [goodScore, setGoodScore] = useState<boolean>(false);
+	const [nextQuestion, setNextQuestion] = useState<boolean>(false);
 	const [data, setData] = useState<PokemonQuizData>({
 		answers: [],
 		correctAnswer: "",
@@ -92,6 +93,11 @@ export default function PokeWhich({
 			});
 		}
 		setDataFetched(true);
+		setNextQuestion(false);
+		if(!gameFinish){
+			setAnsweredQuestions(answeredQuestions + 1);
+			
+		}
 	};
 
 	useEffect(() => {
@@ -119,9 +125,8 @@ export default function PokeWhich({
 	};
 
 	const handleNext = () => {
-		if (!gameFinish) {
-			setAnsweredQuestions(answeredQuestions + 1);
-		}
+		setNextQuestion(true)
+
 		if (!gameFinish) {
 			try {
 				fetchData();
@@ -174,7 +179,7 @@ export default function PokeWhich({
 											width={400}
 											height={400}
 											priority
-											className={`pb-5 ${questionDifficulty=="hard" && !userChoice?'contrast-75 brightness-0':""}`}
+											className={`pb-5 ${questionDifficulty=="hard" && !userChoice && !nextQuestion?'contrast-75 brightness-0':""}`}
 										/>
 
 										<p className="text-center pb-8 text-slate-800">
