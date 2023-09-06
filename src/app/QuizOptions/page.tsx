@@ -6,7 +6,7 @@ export default function QuizOptions() {
 	const [totalQuestions, setTotalQuestions] = useState(20);
 	const [tooMany, setTooMany] = useState(false);
 	const [tooLittle, setTooLittle] = useState(false);
-	const [gameDifficulty, setGameDifficulty] = useState("normal");
+	const [gameDifficulty, setGameDifficulty] = useState("hard");
 
 	const handleDifficulty = 
 	(event: React.ChangeEvent<HTMLInputElement>) => {

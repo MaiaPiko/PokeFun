@@ -159,7 +159,7 @@ export default function PokeWhich({
 		<>
 			{!gameFinish ? (
 				<>
-					{dataFetched ? (
+					{dataFetched && !nextQuestion? (
 						<>
 							<div className="flex justify-center mt-8">
 								<div>
@@ -178,6 +178,7 @@ export default function PokeWhich({
 												{isCorrect  ? <GlowCorrect /> : <GlowIncorrect />}
 											</div>
 										)}
+										
 										<Image
 											src={data.randomPicture}
 											alt={`random Image`}
@@ -185,7 +186,8 @@ export default function PokeWhich({
 											height={400}
 											priority
 											className={`pb-5 ${questionDifficulty=="hard" && !userChoice && !nextQuestion?'contrast-75 brightness-0':
-											difficulty=="expert" && !userChoice && !nextQuestion? `blur-md contrast-75 brightness-0 ${randomRotate}`:""}`}
+											difficulty=="expert" && !userChoice && !nextQuestion? `blur-md contrast-75 brightness-0 ${randomRotate}`:
+											""}`}
 										/>
 
 										<p className="text-center pb-8 text-slate-800">
@@ -205,7 +207,7 @@ export default function PokeWhich({
 							/>
 						</>
 					) : (
-						<LoadingPokeBall text="loading..." />
+						<LoadingPokeBall text=" " />
 					)}
 				</>
 			) : (
