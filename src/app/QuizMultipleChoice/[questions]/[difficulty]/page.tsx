@@ -17,6 +17,7 @@ import GlowCorrect from "../../components/Glow/GlowCorrect";
 import GlowIncorrect from "../../components/Glow/GlowIncorrect";
 import Choices from "../../components/Choices";
 import getUniqueRandomId from "@/lib/getUniqueRandomID";
+import next from "next/types";
 type Params = {
 	params: {
 		questions: string;
@@ -37,6 +38,7 @@ export default function PokeWhich({
 	const [answeredQuestions, setAnsweredQuestions] = useState(1);
 	const [goodScore, setGoodScore] = useState<boolean>(false);
 	const [nextQuestion, setNextQuestion] = useState<boolean>(false);
+	const [wrongAnswersCount, setWrongAnswerCount] = useState(0)
 	const [data, setData] = useState<PokemonQuizData>({
 		answers: [],
 		correctAnswer: "",
@@ -116,9 +118,11 @@ export default function PokeWhich({
 
 		if (answer === data.correctAnswer) {
 			setIsCorrect(true);
-			setScore(score + 1);
+			setScore(score + 1);			
+		
 		} else {
 			setIsCorrect(false);
+			setWrongAnswerCount(wrongAnswersCount+1)
 		}
 
 		if (totalQuestions <= answeredQuestions - 1) {
@@ -151,8 +155,8 @@ export default function PokeWhich({
 		}
 	};
 
-	const wrongAnswers = answeredQuestions - 1 - score;
-	const incorrectAnswers = wrongAnswers < 0 ? 0 : wrongAnswers;
+	
+	
 	
 	return (
 		<>
@@ -161,13 +165,13 @@ export default function PokeWhich({
 					{dataFetched && !nextQuestion? (
 						<>
 							<div className="flex justify-center mt-8">
-								<div>
+								<div className={`${nextQuestion}`}>
 									<div className=" flex flex-row justify-center">
 										<p className="text-green-500 font-bold text-lg ">
 											&#x2713; : {score}
 										</p>
 										<p className="text-red-500 font-bold ps-10">
-											&#9587; : {incorrectAnswers}{" "}
+											&#9587; : {wrongAnswersCount}{" "}
 										</p>
 									</div>
 
