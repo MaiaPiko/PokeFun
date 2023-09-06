@@ -16,6 +16,7 @@ import { GlobalLayoutRouterContext } from "next/dist/shared/lib/app-router-conte
 import GlowCorrect from "../../components/Glow/GlowCorrect";
 import GlowIncorrect from "../../components/Glow/GlowIncorrect";
 import Choices from "../../components/Choices";
+import getUniqueRandomId from "@/lib/getUniqueRandomID";
 type Params = {
 	params: {
 		questions: string;
@@ -40,6 +41,7 @@ export default function PokeWhich({
 		correctAnswer: "",
 		randomPicture: "",
 	});
+	const [usedNumbers, setUsedNumbers] = useState<string[]>([]);
 
 	const [endGamePicture, setEndGamePicture] = useState("");
 
@@ -59,10 +61,10 @@ export default function PokeWhich({
 			setEndGamePicture(endPicture);
 		}
 	};
-	//   console.log(data.correctAnswer)
 
 	const fetchData = async () => {
-		const randomId = getRandomId([]);
+		const randomId = getUniqueRandomId(usedNumbers);
+		setUsedNumbers([...usedNumbers, randomId]);
 		const randomPicture = await fetchPokemonArtwork(randomId);
 		const correctAnswer = (await fetchPokeInfo(randomId)).name;
 		const randomId2 = getRandomId([randomId]);
