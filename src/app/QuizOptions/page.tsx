@@ -115,6 +115,20 @@ export default function QuizOptions() {
 					<label> hard</label>
 				</div>
 
+				<div>
+					<input
+						type="radio"
+						id="expert"
+						value="expert"
+						className="accent-pokeRed"
+						onChange={handleDifficulty}
+						name="difficulty"
+						checked={gameDifficulty === "expert" ? true : false}
+
+					/>
+					<label> expert</label>
+				</div>
+
 
 		
 			</fieldset>

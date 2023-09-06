@@ -170,7 +170,7 @@ export default function PokeWhich({
 									<div className="relative">
 										{userChoice && (
 											<div>
-												{isCorrect ? <GlowCorrect /> : <GlowIncorrect />}
+												{isCorrect  ? <GlowCorrect /> : <GlowIncorrect />}
 											</div>
 										)}
 										<Image
@@ -179,7 +179,8 @@ export default function PokeWhich({
 											width={400}
 											height={400}
 											priority
-											className={`pb-5 ${questionDifficulty=="hard" && !userChoice && !nextQuestion?'contrast-75 brightness-0':""}`}
+											className={`pb-5 ${questionDifficulty=="hard" && !userChoice && !nextQuestion?'contrast-75 brightness-0':
+										difficulty=="expert" && !userChoice && !nextQuestion? "blur-md contrast-75 brightness-0 rotate-90":""}`}
 										/>
 
 										<p className="text-center pb-8 text-slate-800">
